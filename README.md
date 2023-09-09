@@ -69,6 +69,7 @@ No modules.
 | [azurerm_kubernetes_cluster.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/kubernetes_cluster) | resource |
 | [azurerm_resource_group.public](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/resource_group) | resource |
 | [azurerm_role_assignment.role_acrpull](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/client_config) | data source |
 
 ## Inputs
 
@@ -84,5 +85,9 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_aks_name"></a> [aks\_name](#output\_aks\_name) | n/a |
+| <a name="output_rg_name"></a> [rg\_name](#output\_rg\_name) | n/a |
+| <a name="output_subscription"></a> [subscription](#output\_subscription) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
