@@ -1,9 +1,6 @@
-# Terraform template
+# Azure Kubernetes Service (AKS) terraform module
 
-Terraform template for modules and sub-modules.
-Includes pre-commit hooks that lint the terraform code and generate module's
-documentation as part of README file.
-Contains examples of terraform CI/CD pipelines for GitHub Actions and Azure Pipelines.
+Azure Kubernetes Service (AKS) terraform module
 
 ## Pre-commit configuration
 
