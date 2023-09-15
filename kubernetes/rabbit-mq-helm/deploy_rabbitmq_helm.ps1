@@ -9,11 +9,11 @@ helm install event-rabbitmq bitnami/rabbitmq `
   --set auth.password=guest `
   --set service.type=LoadBalancer
 
-helm upgrade my-rabbitmq bitnami/rabbitmq `
+helm upgrade event-rabbitmq bitnami/rabbitmq `
   --set auth.username=guest `
   --set auth.password=guest
 
-helm uninstall my-rabbitmq
+helm uninstall event-rabbitmq
 
 kubectl get endpoints
 
