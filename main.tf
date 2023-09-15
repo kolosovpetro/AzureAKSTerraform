@@ -31,6 +31,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 }
 
 resource "azurerm_container_registry" "acr" {
+  count               = var.should_deploy_acr ? 1 : 0
   name                = local.acr_name
   resource_group_name = azurerm_resource_group.public.name
   location            = azurerm_resource_group.public.location
@@ -39,7 +40,8 @@ resource "azurerm_container_registry" "acr" {
 }
 
 resource "azurerm_role_assignment" "role_acrpull" {
-  scope                            = azurerm_container_registry.acr.id
+  count                            = var.should_deploy_acr ? 1 : 0
+  scope                            = azurerm_container_registry.acr[0].id
   role_definition_name             = "AcrPull"
   principal_id                     = azurerm_kubernetes_cluster.aks.identity[0].principal_id
   skip_service_principal_aad_check = true

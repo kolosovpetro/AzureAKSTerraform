@@ -32,3 +32,8 @@ variable "kubernetes_version" {
   type        = string
   description = "Kubernetes version"
 }
+
+variable "should_deploy_acr" {
+  type        = bool
+  description = "Should deploy ACR"
+}

@@ -78,6 +78,7 @@ No modules.
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Prefix for all resources | `string` | n/a | yes |
 | <a name="input_resource_group_location"></a> [resource\_group\_location](#input\_resource\_group\_location) | Resource group location | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | Resource group name | `string` | n/a | yes |
+| <a name="input_should_deploy_acr"></a> [should\_deploy\_acr](#input\_should\_deploy\_acr) | Should deploy ACR | `bool` | n/a | yes |
 | <a name="input_system_node_count"></a> [system\_node\_count](#input\_system\_node\_count) | Number of system nodes | `number` | n/a | yes |
 
 ## Outputs

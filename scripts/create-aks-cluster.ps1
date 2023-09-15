@@ -67,5 +67,6 @@ kubectl logs movies-api-deployment
 ## check endpoints
 kubectl get endpoints
 kubectl describe service "cars-api-service"
+kubectl describe service "my-rabbitmq"
 
 curl -v http://20.191.53.75/api/Car/all
