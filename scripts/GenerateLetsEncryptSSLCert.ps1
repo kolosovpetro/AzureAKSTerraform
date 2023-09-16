@@ -1,4 +1,4 @@
-$domain = "mangomesenger.company";
+$domain = "devtest.team";
 $email = "kolosovp94@gmail.com";
 $server = "https://acme-v02.api.letsencrypt.org/directory";
 
@@ -11,6 +11,10 @@ certbot certonly `
     -d "$domain"
 
 nslookup -type=txt _acme-challenge.$domain
+
+kubectl create secret tls my-tls-secret `
+    --cert=fullchain.pem `
+    --key=privkey.pem
 
 # From folder C:\Certbot\live\mangomesenger.company in CMD as Admin
 type fullchain.pem privkey.pem > bundle.pem
