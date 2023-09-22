@@ -18,6 +18,16 @@ variable "cluster_name" {
   description = "Name of the AKS cluster"
 }
 
+variable "default_node_pool_vm_size" {
+  type        = string
+  description = "Default node pool VM size"
+}
+
+variable "default_node_pool_type" {
+  type        = string
+  description = "Default node pool type"
+}
+
 variable "system_node_count" {
   type        = number
   description = "Number of system nodes"
