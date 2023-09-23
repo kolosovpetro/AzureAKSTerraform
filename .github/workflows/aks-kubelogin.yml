@@ -1,0 +1,45 @@
+name: Kubelogin to AKS
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Authenticate to AKS
+        run: az aks get-credentials --resource-group $RG_NAME --name $AKS_NAME --subscription $SUBSCRIPTION_ID
+        env:
+          RG_NAME: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          AKS_NAME: ${{ secrets.AZURE_AKS_CLUSTER }}
+          SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - uses: azure/use-kubelogin@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          kubelogin-version: 'latest'
+
+      - name: Use kubelogin to get a Kubernetes token
+        run: kubelogin convert-kubeconfig -l azurecli
+#        env:
+#          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+#          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+#          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+#          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Test connection
+        run: kubectl get nodes
