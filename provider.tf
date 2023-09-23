@@ -5,3 +5,11 @@ provider "azurerm" {
     }
   }
 }
+
+provider "azuread" {
+  # default takes current user/identity tenant
+}
+
+provider "azapi" {
+  # Configuration options
+}

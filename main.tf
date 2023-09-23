@@ -28,6 +28,17 @@ resource "azurerm_kubernetes_cluster" "aks" {
     load_balancer_sku = "standard"
     network_plugin    = "kubenet" # CNI
   }
+
+  oms_agent {
+    log_analytics_workspace_id      = azurerm_log_analytics_workspace.workspace.id
+    msi_auth_for_monitoring_enabled = true
+  }
+
+  lifecycle {
+    ignore_changes = [
+      monitor_metrics
+    ]
+  }
 }
 
 resource "azurerm_container_registry" "acr" {

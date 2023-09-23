@@ -99,6 +99,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_aks_name"></a> [aks\_name](#output\_aks\_name) | n/a |
+| <a name="output_grafana_endpoint"></a> [grafana\_endpoint](#output\_grafana\_endpoint) | n/a |
 | <a name="output_rg_name"></a> [rg\_name](#output\_rg\_name) | n/a |
 | <a name="output_subscription"></a> [subscription](#output\_subscription) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

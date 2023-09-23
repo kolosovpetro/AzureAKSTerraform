@@ -9,3 +9,7 @@ output "aks_name" {
 output "subscription" {
   value = data.azurerm_client_config.current.subscription_id
 }
+
+output "grafana_endpoint" {
+  value = azurerm_dashboard_grafana.grafana.endpoint
+}
