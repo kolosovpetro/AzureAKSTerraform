@@ -11,5 +11,5 @@ output "subscription" {
 }
 
 output "grafana_endpoint" {
-  value = module.grafana[0].grafana_endpoint
+  value = length(module.grafana) > 0 ? module.grafana[0].grafana_endpoint : null
 }

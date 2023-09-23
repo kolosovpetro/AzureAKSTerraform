@@ -20,7 +20,7 @@ module "aks" {
   default_node_pool_type      = var.default_node_pool_type
   default_node_pool_vm_size   = var.default_node_pool_vm_size
   kubernetes_version          = var.kubernetes_version
-  log_analytics_workspace_id  = module.log_analytics[0].id
+  log_analytics_workspace_id  = length(module.log_analytics) > 0 ? module.log_analytics[0].id : null
   resource_group_location     = azurerm_resource_group.public.location
   resource_group_name         = azurerm_resource_group.public.name
   system_node_count           = var.system_node_count
