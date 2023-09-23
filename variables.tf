@@ -38,6 +38,11 @@ variable "acr_name" {
   description = "Name of the ACR"
 }
 
+variable "log_analytics_sku" {
+  type        = string
+  description = "Log analytics SKU"
+}
+
 variable "kubernetes_version" {
   type        = string
   description = "Kubernetes version"
@@ -46,4 +51,14 @@ variable "kubernetes_version" {
 variable "should_deploy_acr" {
   type        = bool
   description = "Should deploy ACR"
+}
+
+variable "should_deploy_log_analytics" {
+  type        = bool
+  description = "Should deploy log analytics"
+}
+
+variable "should_deploy_prometheus" {
+  type        = bool
+  description = "Should deploy prometheus"
 }

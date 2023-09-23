@@ -3,9 +3,13 @@ output "rg_name" {
 }
 
 output "aks_name" {
-  value = azurerm_kubernetes_cluster.aks.name
+  value = module.aks.name
 }
 
 output "subscription" {
   value = data.azurerm_client_config.current.subscription_id
+}
+
+output "grafana_endpoint" {
+  value = length(module.grafana) > 0 ? module.grafana[0].grafana_endpoint : null
 }
