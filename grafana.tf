@@ -15,6 +15,10 @@ resource "azurerm_dashboard_grafana" "grafana" {
   identity {
     type = "SystemAssigned"
   }
+
+  depends_on = [
+    azapi_resource.prometheus
+  ]
 }
 
 resource "azurerm_role_assignment" "role_grafana_admin" {
