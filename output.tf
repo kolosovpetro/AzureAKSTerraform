@@ -11,5 +11,5 @@ output "subscription" {
 }
 
 output "grafana_endpoint" {
-  value = module.grafana.grafana_endpoint
+  value = module.grafana[0].grafana_endpoint
 }

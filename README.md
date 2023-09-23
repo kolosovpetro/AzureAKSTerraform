@@ -82,10 +82,13 @@ sas_token            = "sas_token"
 | <a name="input_default_node_pool_type"></a> [default\_node\_pool\_type](#input\_default\_node\_pool\_type) | Default node pool type | `string` | n/a | yes |
 | <a name="input_default_node_pool_vm_size"></a> [default\_node\_pool\_vm\_size](#input\_default\_node\_pool\_vm\_size) | Default node pool VM size | `string` | n/a | yes |
 | <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | Kubernetes version | `string` | n/a | yes |
+| <a name="input_log_analytics_sku"></a> [log\_analytics\_sku](#input\_log\_analytics\_sku) | Log analytics SKU | `string` | n/a | yes |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Prefix for all resources | `string` | n/a | yes |
 | <a name="input_resource_group_location"></a> [resource\_group\_location](#input\_resource\_group\_location) | Resource group location | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | Resource group name | `string` | n/a | yes |
 | <a name="input_should_deploy_acr"></a> [should\_deploy\_acr](#input\_should\_deploy\_acr) | Should deploy ACR | `bool` | n/a | yes |
+| <a name="input_should_deploy_log_analytics"></a> [should\_deploy\_log\_analytics](#input\_should\_deploy\_log\_analytics) | Should deploy log analytics | `bool` | n/a | yes |
+| <a name="input_should_deploy_prometheus"></a> [should\_deploy\_prometheus](#input\_should\_deploy\_prometheus) | Should deploy prometheus | `bool` | n/a | yes |
 | <a name="input_system_node_count"></a> [system\_node\_count](#input\_system\_node\_count) | Number of system nodes | `number` | n/a | yes |
 
 ## Outputs
