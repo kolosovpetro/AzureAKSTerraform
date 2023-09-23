@@ -54,29 +54,23 @@ sas_token            = "sas_token"
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 1.9.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.71.0 |
-| <a name="provider_null"></a> [null](#provider\_null) | 3.2.1 |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_acr"></a> [acr](#module\_acr) | ./modules/acr | n/a |
+| <a name="module_aks"></a> [aks](#module\_aks) | ./modules/aks | n/a |
+| <a name="module_grafana"></a> [grafana](#module\_grafana) | ./modules/grafana | n/a |
+| <a name="module_log_analytics"></a> [log\_analytics](#module\_log\_analytics) | ./modules/log_analytics | n/a |
+| <a name="module_prometheus"></a> [prometheus](#module\_prometheus) | ./modules/prometheus | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [azapi_resource.prometheus](https://registry.terraform.io/providers/Azure/azapi/1.9.0/docs/resources/resource) | resource |
-| [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/container_registry) | resource |
-| [azurerm_dashboard_grafana.grafana](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/dashboard_grafana) | resource |
-| [azurerm_kubernetes_cluster.aks](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/kubernetes_cluster) | resource |
-| [azurerm_log_analytics_solution.solution](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/log_analytics_solution) | resource |
-| [azurerm_log_analytics_workspace.workspace](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/log_analytics_workspace) | resource |
 | [azurerm_resource_group.public](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/resource_group) | resource |
-| [azurerm_role_assignment.role_acrpull](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.role_grafana_admin](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
-| [azurerm_role_assignment.role_monitoring_data_reader](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/resources/role_assignment) | resource |
-| [null_resource.enable_azure_monitor_metrics](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.71.0/docs/data-sources/client_config) | data source |
 
 ## Inputs

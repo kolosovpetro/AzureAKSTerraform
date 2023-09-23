@@ -3,7 +3,7 @@ output "rg_name" {
 }
 
 output "aks_name" {
-  value = azurerm_kubernetes_cluster.aks.name
+  value = module.aks.name
 }
 
 output "subscription" {
@@ -11,5 +11,5 @@ output "subscription" {
 }
 
 output "grafana_endpoint" {
-  value = azurerm_dashboard_grafana.grafana.endpoint
+  value = module.grafana.grafana_endpoint
 }
