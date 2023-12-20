@@ -20,3 +20,10 @@ kubectl create secret tls my-tls-secret `
 type fullchain.pem privkey.pem > bundle.pem
 
 openssl pkcs12 -export -out "certificate_combined.pfx" -inkey "privkey.pem" -in "cert.pem" -certfile bundle.pem
+
+# Import to kubernetes
+
+kubectl create secret tls tls-secret --cert=fullchain.pem --key=privkey.pem
+
+kubectl delete secret my-tls-secret --namespace event-triangle
+kubectl create secret tls my-tls-secret --cert=fullchain.pem --key=privkey.pem --namespace event-triangle
