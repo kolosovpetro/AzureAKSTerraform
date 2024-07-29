@@ -2,6 +2,57 @@
 
 Azure Kubernetes Service (AKS) terraform module
 
+## K8s Architecture
+
+![Kubernetes Architecture](./img/Kubernetes_architecture.png)
+
+### Definitions
+
+- **Cluster**: A set of nodes that run containerized applications managed by Kubernetes, consisting of a control plane that orchestrates the cluster and worker nodes that run the applications.
+
+- **Control Plane**: A part of a Cluster that consists of API Server, Controller Manager, Scheduler, and Etcd. Responsible for all interactions with Kubernetes nodes, cluster state, and interactions with developers.
+
+- **API Server**: A component of the Control Plane that receives `kubectl` commands from developers to update the Cluster state.
+
+- **Controller Manager**: A component of the Control Plane that interacts with the cloud provider to manage cloud resources, such as disks.
+
+- **Scheduler**: A component of the Control Plane responsible for assigning newly created pods to specific nodes in the Cluster.
+
+- **Etcd**: A component of the Control Plane that keeps cluster configuration (state) in key-value format.
+
+- **Node**: A virtual or physical machine managed by the Control Plane inside the Cluster, consisting of Kubelet, Kubeproxy, Container Runtime, and Pods.
+
+- **Kubelet**: A component of the Node responsible for communication between the Control Plane API Server and the Node. It executes commands from the API Server, maintaining the proper Pod state.
+
+- **Kubeproxy**: A component of the Node that ensures that pods are publicly available to the external network and accessible to users.
+
+- **Container Runtime**: A software component of the Node that manages the execution and lifecycle of containerized applications. It handles tasks such as starting, stopping, and managing containers, as well as ensuring their proper isolation and resource allocation.
+
+- **Pod**: A component of the Node that represents the smallest deployable unit, handling one or more instances of containerized applications.
+
+- **Deployment**: A resource object that defines the desired state of a containerized application, such as the number of replicas of a pod, the container images to use, and update strategies.
+
+- **Service**: An abstraction that defines a logical set of pods and a policy to access them. Services enable communication between different parts of an application and can expose an application to the outside world.
+
+- **Cluster IP**: A type of Service that provides an internal IP address within the Kubernetes cluster. This IP address is accessible only from within the cluster, allowing different services and pods to communicate with each other without exposing them to the outside world.
+
+- **NodePort**: A type of Service that exposes an application by assigning a static port on each Node's public IP address. This allows internet traffic to access the service by sending requests to the Node's public IP address on the specified port.
+
+- **LoadBalancer**: A type of Service that automatically provisions an external load balancer to distribute incoming traffic across the pods of a service. It provides a single external IP address, allowing external clients to access the service, and ensures that traffic is balanced across the available pods for better performance and reliability.
+
+- **ConfigMap**: A resource that allows you to store configuration data in key-value pairs. It decouples configuration details from application code, enabling you to manage application settings separately and update them without rebuilding your application images.
+
+- **Secret**: A resource object used to store sensitive information such as passwords, tokens, and keys. It helps manage and protect sensitive data by keeping it separate from the application code.
+
+- **Persistent Volume**: A storage resource provisioned in a cluster that provides a way for users to manage durable storage separately from the lifecycle of individual pods.
+
+- **Ingress Controller**: A specialized load balancer that manages external access to services within a cluster, typically via HTTP and HTTPS. It implements the rules defined in Ingress resources to route and control traffic, enabling features like host-based and path-based routing, SSL termination, and load balancing for multiple services.
+
+- **Horizontal Pod Autoscaler (HPA)**: Automatically adjusts the number of pod replicas in a deployment or replica set based on observed CPU utilization or other custom metrics.
+
+- **Cluster Autoscaler**: Automatically adjusts the number of nodes in a cluster based on the resource demands of the pods.
+
+
 ## Pre-commit configuration
 
 - Install python3 via windows store
