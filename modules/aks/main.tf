@@ -6,12 +6,17 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dns_prefix          = var.aks_name
 
   default_node_pool {
-    name                = "systempool"
-    node_count          = var.system_node_count
-    vm_size             = var.default_node_pool_vm_size
-    type                = var.default_node_pool_type
-    enable_auto_scaling = false
+    name                        = "systempool"
+    node_count                  = var.system_node_count
+    vm_size                     = var.default_node_pool_vm_size
+    type                        = var.default_node_pool_type
     temporary_name_for_rotation = "rotationpool"
+
+    upgrade_settings {
+      drain_timeout_in_minutes      = 0
+      max_surge                     = "10%"
+      node_soak_duration_in_minutes = 0
+    }
   }
 
   identity {
@@ -21,19 +26,5 @@ resource "azurerm_kubernetes_cluster" "aks" {
   network_profile {
     load_balancer_sku = "standard"
     network_plugin    = "kubenet" # CNI
-  }
-
-  dynamic "oms_agent" {
-    for_each = var.should_deploy_log_analytics ? [1] : []
-    content {
-      log_analytics_workspace_id      = var.log_analytics_workspace_id
-      msi_auth_for_monitoring_enabled = true
-    }
-  }
-
-  lifecycle {
-    ignore_changes = [
-      monitor_metrics
-    ]
   }
 }
