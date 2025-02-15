@@ -32,3 +32,14 @@ variable "default_node_pool_type" {
   type        = string
   description = "The type of the default node pool"
 }
+
+variable "should_deploy_log_analytics" {
+  type        = bool
+  description = "Whether or not to deploy a Log Analytics workspace for the AKS cluster"
+}
+
+variable "log_analytics_workspace_id" {
+  type        = string
+  description = "The ID of the Log Analytics workspace to use for the AKS cluster"
+  default     = ""
+}
