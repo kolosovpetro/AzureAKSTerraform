@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "public" {
 }
 
 locals {
-  should_deploy_log_acr       = true
+  should_deploy_acr           = true
   should_deploy_log_analytics = true
   should_deploy_prometheus    = true
   should_deploy_grafana       = true
@@ -22,10 +22,11 @@ module "aks" {
   resource_group_name         = azurerm_resource_group.public.name
   system_node_count           = 3
   should_deploy_log_analytics = local.should_deploy_log_analytics
-  log_analytics_workspace_id  = module.log_analytics.id
+  log_analytics_workspace_id  = local.should_deploy_log_analytics ? module.log_analytics[0].id : ""
 }
 
 module "acr" {
+  count                     = local.should_deploy_acr ? 1 : 0
   source                    = "./modules/acr"
   acr_name                  = "acr${var.prefix}"
   aks_identity_principal_id = module.aks.principal_id
@@ -34,6 +35,7 @@ module "acr" {
 }
 
 module "log_analytics" {
+  count                             = local.should_deploy_log_analytics ? 1 : 0
   source                            = "./modules/log-analytics"
   log_analytics_location            = azurerm_resource_group.public.location
   log_analytics_resource_group_name = azurerm_resource_group.public.name
@@ -42,6 +44,7 @@ module "log_analytics" {
 }
 
 module "prometheus" {
+  count                   = local.should_deploy_prometheus ? 1 : 0
   source                  = "./modules/prometheus"
   aks_name                = module.aks.name
   aks_resource_group      = module.aks.resource_group_name
@@ -51,10 +54,11 @@ module "prometheus" {
 }
 
 module "managed_grafana" {
+  count                   = (local.should_deploy_prometheus && local.should_deploy_grafana) ? 1 : 0
   source                  = "./modules/grafana"
   grafana_admin_object_id = data.azurerm_client_config.current.object_id
   grafana_name            = "amg-${var.prefix}"
-  prometheus_id           = module.prometheus.id
+  prometheus_id           = module.prometheus[0].id
   resource_group_location = azurerm_resource_group.public.location
   resource_group_name     = azurerm_resource_group.public.name
 }
