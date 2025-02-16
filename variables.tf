@@ -1,64 +1,35 @@
-variable "resource_group_name" {
+variable "location" {
   type        = string
-  description = "Resource group name"
-}
-
-variable "resource_group_location" {
-  type        = string
-  description = "Resource group location"
+  description = "Resource group location where resources will be deployed."
+  default     = "northeurope"
 }
 
 variable "prefix" {
   type        = string
-  description = "Prefix for all resources"
-}
-
-variable "cluster_name" {
-  type        = string
-  description = "Name of the AKS cluster"
-}
-
-variable "default_node_pool_vm_size" {
-  type        = string
-  description = "Default node pool VM size"
-}
-
-variable "default_node_pool_type" {
-  type        = string
-  description = "Default node pool type"
-}
-
-variable "system_node_count" {
-  type        = number
-  description = "Number of system nodes"
-}
-
-variable "acr_name" {
-  type        = string
-  description = "Name of the ACR"
-}
-
-variable "log_analytics_sku" {
-  type        = string
-  description = "Log analytics SKU"
+  description = "Prefix used for naming all resources to ensure uniqueness."
+  default     = "d01"
 }
 
 variable "kubernetes_version" {
   type        = string
-  description = "Kubernetes version"
+  description = "Version of Kubernetes to be used in the AKS cluster."
+  default     = "1.31.2"
 }
 
-variable "should_deploy_acr" {
-  type        = bool
-  description = "Should deploy ACR"
+variable "subscription_id" {
+  type        = string
+  description = "Azure Subscription ID where the resources will be deployed."
+  default     = "1b08b9a2-ac6d-4b86-8a2f-8fef552c8371"
 }
 
-variable "should_deploy_log_analytics" {
-  type        = bool
-  description = "Should deploy log analytics"
+variable "tenant_id" {
+  type        = string
+  description = "Azure Tenant ID for authentication."
+  default     = "b40a105f-0643-4922-8e60-10fc1abf9c4b"
 }
 
-variable "should_deploy_prometheus" {
-  type        = bool
-  description = "Should deploy prometheus"
+variable "client_id" {
+  type        = string
+  description = "Azure Client ID (Service Principal) used for authentication."
+  default     = "4d65956c-5661-494f-9e7e-c171aec0e53f"
 }

@@ -8,12 +8,21 @@ variable "resource_group_name" {
   description = "The name of the Azure Resource Group"
 }
 
-variable "location" {
-  type        = string
-  description = "The location of the Azure Resource Group"
-}
+# variable "resource_group_location" {
+#   type        = string
+#   description = "The location of the Azure Resource Group"
+# }
 
 variable "aks_identity_principal_id" {
   type        = string
   description = "The principal id of the AKS identity"
+}
+
+variable "aks_name" {
+  type        = string
+  description = "AKS name"
+}
+variable "aks_resource_group" {
+  type        = string
+  description = "AKS resource group"
 }

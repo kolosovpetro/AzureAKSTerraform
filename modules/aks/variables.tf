@@ -41,4 +41,5 @@ variable "should_deploy_log_analytics" {
 variable "log_analytics_workspace_id" {
   type        = string
   description = "The ID of the Log Analytics workspace to use for the AKS cluster"
+  default     = ""
 }

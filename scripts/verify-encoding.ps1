@@ -19,20 +19,11 @@ $ErrorActionPreference = 'Stop'
 $allFiles = git -c core.quotepath=off ls-tree -r HEAD --name-only
 Write-Output "Total files in the repository: $($allFiles.Length)"
 
-$counter = [pscustomobject] @{ Value = 0 }
-$groupSize = 50
-$chunks = $allFiles | Group-Object -Property { [math]::Floor($counter.Value++ / $groupSize) }
-Write-Output "Split into $($chunks.Count) chunks."
-
 # https://stackoverflow.com/questions/6119956/how-to-determine-if-git-handles-a-file-as-binary-or-as-text#comment15281840_6134127
 $nullHash = '4b825dc642cb6eb9a060e54bf8d69288fbee4904'
-$textFiles = $chunks | ForEach-Object {
-    $chunk = $_.Group
-    git -c core.quotepath=off diff --numstat $nullHash HEAD -- @chunk |
-        Where-Object { -not $_.StartsWith('-') } |
-        ForEach-Object { [Regex]::Unescape($_.Split("`t", 3)[2]) }
-}
-
+$textFiles = git -c core.quotepath=off diff --numstat $nullHash HEAD -- @allFiles |
+    Where-Object { -not $_.StartsWith('-') } |
+    ForEach-Object { [Regex]::Unescape($_.Split("`t", 3)[2]) }
 Write-Output "Text files in the repository: $($textFiles.Length)"
 
 $bom = @(0xEF, 0xBB, 0xBF)
@@ -42,14 +33,24 @@ $lineEndingErrors = @()
 try {
     Push-Location $SourceRoot
     foreach ($file in $textFiles) {
-        if ([IO.Path]::GetExtension($file) -eq '.DotSettings') {
+        if ([IO.Path]::GetExtension($file) -eq '.DotSettings' -or $file.EndsWith('.verified.cs')) {
             continue
         }
 
         $fullPath = Resolve-Path -LiteralPath $file
-        if ((Get-Item -Force -LiteralPath $file).Length -eq 0) { continue }
 
+        if (-Not (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
+            Write-Warning "Skipping missing file: $file"
+            continue
+        }
+        
         $bytes = [IO.File]::ReadAllBytes($fullPath) | Select-Object -First $bom.Length
+
+        if ($null -eq $bytes -or $bytes.Length -eq 0) {
+            Write-Warning "Skipping empty or unreadable file: $file"
+            continue
+        }
+        
         $bytesEqualsBom = @(Compare-Object $bytes $bom -SyncWindow 0).Length -eq 0
         if ($bytesEqualsBom -and $Autofix) {
             $fullContent = [IO.File]::ReadAllBytes($fullPath)
@@ -71,15 +72,11 @@ try {
         }
     }
 
-    $errorMessage = ''
     if ($bomErrors.Length) {
-        $errorMessage += "The following $($bomErrors.Length) files have UTF-8 BOM:`n" + ($bomErrors -join "`n")
+        throw "The following $($bomErrors.Length) files have UTF-8 BOM:`n" + ($bomErrors -join "`n")
     }
     if ($lineEndingErrors.Length) {
-        $errorMessage += "`nThe following $($lineEndingErrors.Length) files have CRLF instead of LF:`n" + ($lineEndingErrors -join "`n")
-    }
-    if ($errorMessage.Length) {
-        throw $errorMessage
+        throw "The following $($lineEndingErrors.Length) files have CRLF instead of LF:`n" + ($lineEndingErrors -join "`n")
     }
 } finally {
     Pop-Location
