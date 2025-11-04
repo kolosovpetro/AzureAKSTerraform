@@ -6,10 +6,10 @@ resource "azurerm_resource_group" "public" {
 }
 
 locals {
-  should_deploy_acr           = true
-  should_deploy_log_analytics = true
-  should_deploy_prometheus    = true
-  should_deploy_grafana       = true
+  should_deploy_acr           = false
+  should_deploy_log_analytics = false
+  should_deploy_prometheus    = false
+  should_deploy_grafana       = false
 }
 
 module "aks" {

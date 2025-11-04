@@ -13,7 +13,7 @@ variable "prefix" {
 variable "kubernetes_version" {
   type        = string
   description = "Version of Kubernetes to be used in the AKS cluster."
-  default     = "1.31.2"
+  default     = "1.34.0"
 }
 
 variable "subscription_id" {
