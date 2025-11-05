@@ -1,0 +1,21 @@
+﻿helm install kibana elastic/kibana -n elk
+
+helm upgrade kibana elastic/kibana -n elk `
+  --set resources.requests.cpu=200m `
+  --set resources.requests.memory=256Mi `
+  --set resources.limits.cpu=500m `
+  --set resources.limits.memory=512Mi
+
+#NAME: kibana
+#LAST DEPLOYED: Wed Nov  5 12:20:49 2025
+#NAMESPACE: elk
+#STATUS: deployed
+#REVISION: 1
+#TEST SUITE: None
+#NOTES:
+#1. Watch all containers come up.
+#$ kubectl get pods --namespace=elk -l release=kibana -w
+#2. Retrieve the elastic user's password.
+#  $ kubectl get secrets --namespace=elk elasticsearch-master-credentials -ojsonpath='{.data.password}' | base64 -d
+#3. Retrieve the kibana service account token.
+#  $ kubectl get secrets --namespace=elk kibana-kibana-es-token -ojsonpath='{.data.token}' | base64 -d
