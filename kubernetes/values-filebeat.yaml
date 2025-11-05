@@ -1,0 +1,39 @@
+﻿filebeatConfig:
+  filebeat.yml: |
+    filebeat.autodiscover:
+      providers:
+        - type: kubernetes
+          hints.enabled: false
+          templates:
+            - condition:
+                or:
+                - contains.kubernetes.container.name: movies
+              config:
+                - type: container
+                  paths:
+                    - /var/log/pods/${data.kubernetes.namespace}_${data.kubernetes.pod.name}_${data.kubernetes.pod.uid}/${data.kubernetes.container.name}/*.log*
+                  multiline.type: pattern
+                  multiline.pattern: '^\d{4}-\d{2}-\d{2}'
+                  multiline.negate: true
+                  multiline.match: after
+                  multiline.max_lines: 10
+                  processors:
+                    - add_tags:
+                        tags: [movies]
+          appenders:
+            - type: config
+              config:
+                fields:
+                  logplane: "app-logs"
+                fields_under_root: true
+                close_timeout: "5m"
+                ignore_older: "6m"
+                clean_inactive: "169h"
+                close_removed: false
+                exclude_files: ['\.gz$']
+
+    output.logstash:
+      hosts: ["logstash-service:5044"]
+      loadbalance: false
+      ttl: 1m
+      pipelining: 0

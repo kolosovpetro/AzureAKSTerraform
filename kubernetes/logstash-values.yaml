@@ -1,0 +1,20 @@
+﻿logstashPipeline:
+  logstash.conf: |
+    input {
+      beats {
+        port => 5044
+      }
+    }
+
+    filter {
+      # Example: add a tag or modify fields
+      mutate { add_field => { "source" => "aks" } }
+    }
+
+    output {
+      elasticsearch {
+        hosts => ["http://elasticsearch-master:9200"]
+        index => "logs-%{+YYYY.MM.dd}"
+      }
+      stdout { codec => rubydebug }
+    }

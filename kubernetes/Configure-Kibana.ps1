@@ -1,10 +1,6 @@
-﻿helm install kibana elastic/kibana -n elk
+﻿helm install kibana elastic/kibana -n elk `
+  --set elasticsearch.hosts=["http://elasticsearch-master:9200"]
 
-helm upgrade kibana elastic/kibana -n elk `
-  --set resources.requests.cpu=200m `
-  --set resources.requests.memory=256Mi `
-  --set resources.limits.cpu=500m `
-  --set resources.limits.memory=512Mi
 
 #NAME: kibana
 #LAST DEPLOYED: Wed Nov  5 12:20:49 2025
