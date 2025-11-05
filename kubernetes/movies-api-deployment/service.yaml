@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: movies-api-service
+  namespace: movies
 spec:
   selector:
     app: movies-api
