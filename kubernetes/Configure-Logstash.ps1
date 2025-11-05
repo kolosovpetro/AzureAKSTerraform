@@ -1,4 +1,4 @@
-﻿#helm install logstash elastic/logstash -n elk
+#helm install logstash elastic/logstash -n elk
 helm upgrade --install logstash elastic/logstash -n elk -f logstash-values.yaml
 kubectl apply -f logstash-service.yaml
 

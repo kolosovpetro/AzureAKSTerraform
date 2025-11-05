@@ -1,4 +1,4 @@
-﻿kubectl create namespace elk
+kubectl create namespace elk
 helm repo add elastic https://helm.elastic.co
 helm repo update
 

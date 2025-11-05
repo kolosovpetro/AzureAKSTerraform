@@ -1,4 +1,4 @@
-﻿helm install kibana elastic/kibana -n elk `
+helm install kibana elastic/kibana -n elk `
   --set elasticsearch.hosts=["http://elasticsearch-master:9200"]
 
 

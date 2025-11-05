@@ -1,4 +1,4 @@
-﻿#helm install filebeat elastic/filebeat -n elk `
+#helm install filebeat elastic/filebeat -n elk `
 #  --set output.logstash.enabled=true `
 #  --set output.logstash.hosts=["logstash-service:5044"]
 

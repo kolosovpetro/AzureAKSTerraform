@@ -1,4 +1,4 @@
-﻿Order
+Order
 
 - .\Configure-Elastic.ps1
 - .\Configure-Kibana.ps1

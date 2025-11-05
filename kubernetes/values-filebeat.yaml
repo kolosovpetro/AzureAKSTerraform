@@ -1,4 +1,4 @@
-﻿filebeatConfig:
+filebeatConfig:
   filebeat.yml: |
     filebeat.autodiscover:
       providers:

@@ -1,4 +1,4 @@
-﻿logstashPipeline:
+logstashPipeline:
   logstash.conf: |
     input {
       beats {
