@@ -1,6 +1,25 @@
 # Azure Kubernetes Service (AKS) terraform module
 
 Azure Kubernetes Service (AKS) terraform module.
+To get Azure Kubernetes latest version per region use:
+
+- `az aks get-versions --location northeurope --output table`
+
+## Usage
+
+```hcl
+module "aks" {
+  source                      = "github.com/kolosovpetro/AzureAKSTerraform.git//modules/aks?ref=master"
+  aks_name                    = "aks-${var.prefix}"
+  default_node_pool_type      = "VirtualMachineScaleSets"
+  default_node_pool_vm_size   = "Standard_D4s_v3" # or Standard_DS2_v2
+  kubernetes_version          = "1.34.01"
+  resource_group_location     = azurerm_resource_group.public.location
+  resource_group_name         = azurerm_resource_group.public.name
+  system_node_count           = 3
+  should_deploy_log_analytics = false
+}
+```
 
 ## Required Azure providers
 

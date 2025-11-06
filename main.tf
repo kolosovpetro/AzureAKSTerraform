@@ -6,17 +6,17 @@ resource "azurerm_resource_group" "public" {
 }
 
 locals {
-  should_deploy_acr           = true
-  should_deploy_log_analytics = true
-  should_deploy_prometheus    = true
-  should_deploy_grafana       = true
+  should_deploy_acr           = false
+  should_deploy_log_analytics = false
+  should_deploy_prometheus    = false
+  should_deploy_grafana       = false
 }
 
 module "aks" {
   source                      = "./modules/aks"
   aks_name                    = "aks-${var.prefix}"
   default_node_pool_type      = "VirtualMachineScaleSets"
-  default_node_pool_vm_size   = "Standard_DS2_v2"
+  default_node_pool_vm_size   = "Standard_D4s_v3"
   kubernetes_version          = var.kubernetes_version
   resource_group_location     = azurerm_resource_group.public.location
   resource_group_name         = azurerm_resource_group.public.name

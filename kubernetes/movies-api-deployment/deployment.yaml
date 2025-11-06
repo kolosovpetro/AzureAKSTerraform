@@ -3,11 +3,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: movies-api-deployment
+  namespace: movies
 spec:
   selector:
     matchLabels:
       app: movies-api
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -15,7 +16,7 @@ spec:
     spec:
       containers:
         - name: movies-api
-          image: petrokolosov/movies-api:0.13.86
+          image: petrokolosov/movies-api:latest
           ports:
             - containerPort: 80
           env:
@@ -30,3 +31,21 @@ spec:
                 configMapKeyRef:
                   name: movies-configmap
                   key: ShouldMigrate
+
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 2
+            failureThreshold: 3

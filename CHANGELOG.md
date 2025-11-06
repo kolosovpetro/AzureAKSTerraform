@@ -15,3 +15,4 @@ and this project adheres to [Semantic Versioning v2.0.0](https://semver.org/spec
 - Add Azure Managed Grafana terraform module
 - Use Azure API to deploy managed Prometheus
 - Registered to use namespace 'Microsoft.Dashboard'
+- Add usage example readme

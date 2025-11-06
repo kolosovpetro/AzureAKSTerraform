@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: movies-configmap
+  namespace: movies
   labels:
     app: movies-api
 data:
